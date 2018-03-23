@@ -1,0 +1,10 @@
+{
+  "name": "cervejator",
+  "private": true,
+  "dependencies": {
+    "amcharts": "^3.14.5",
+    "jquery": "^3.3.1",
+    "jquery-ujs": "^1.2.2",
+    "lodash": "^4.17.5"
+  }
+}

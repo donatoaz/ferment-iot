@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Cervejator
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    - if user_signed_in?
+      %li
+        = link_to('Logout', destroy_user_session_path, method: :delete)
+    - else
+      %li
+        = link_to('Login', new_user_session_path)
+    = yield

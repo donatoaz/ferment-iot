@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @sensor.name
+  = @sensor.write_key
+.chart#chart
+.sensor-readings#sensor-readings{ "data-sensor-id": @sensor.id }
+= link_to 'Edit', edit_sensor_path(@sensor)
+|
+= link_to 'Back', sensors_path
