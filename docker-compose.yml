@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: cervejator
+      POSTGRES_USER: cervejator
+      POSTGRES_PASSWORD: fakeinitialpass
+ redis:
+   image: redis:3.2
+ web:
+   build: .
+   environment:
+     - RAILS_ENV: production
+   command: bundle exec rails s -b "0.0.0.0" -p 4000
+   volumes:
+     - .:/web
+   ports:
+     - "4000:4000"
+   depends_on:
+     - db
+     - redis
+     - mqtt
+ subscriber:
+   build: .
+   envirionment:
+     - MQTT_BROKER_HOST: mqtt
+     - MQTT_BROKER_PORT: 1883
+   command: bundle exec rake mqtt:subscriber
+   volumes:
+     - .:/web
+   depends_on:
+     - redis
+     - db
+     - mqtt
+ mqtt:
+   image: 'donatoaz/mymosquitto'
+   ports:
+     - "1883:1883"
+     - "9001:9001"
+   volumes:
+     - "./mqtt/config:/mqtt/config:ro"
+     - "./mqtt/data:/mqtt/data"
+     - "./mqtt/log:/mqtt/log"
