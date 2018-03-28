@@ -10,20 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323011007) do
+ActiveRecord::Schema.define(version: 20180324215108) do
+
+  create_table "actuators", force: :cascade do |t|
+    t.string "name"
+    t.string "write_key"
+    t.integer "output", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["write_key"], name: "index_actuators_on_write_key", unique: true
+  end
+
+  create_table "control_loops", force: :cascade do |t|
+    t.string "name"
+    t.integer "mode"
+    t.decimal "reference", precision: 6, scale: 3
+    t.string "parameters"
+    t.integer "sensor_id"
+    t.integer "actuator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actuator_id"], name: "index_control_loops_on_actuator_id"
+    t.index ["sensor_id"], name: "index_control_loops_on_sensor_id"
+  end
 
   create_table "data", force: :cascade do |t|
     t.integer "sensor_id"
     t.string "value"
+    t.datetime "measured_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sensors", force: :cascade do |t|
     t.string "name"
+    t.string "write_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "write_key"
     t.index ["write_key"], name: "index_sensors_on_write_key", unique: true
   end
 

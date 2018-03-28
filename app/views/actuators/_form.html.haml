@@ -1,0 +1,13 @@
+= form_for @actuator do |f|
+  - if @actuator.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@actuator.errors.count, "error")} prohibited this actuator from being saved:"
+      %ul
+        - @actuator.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit 'Save'

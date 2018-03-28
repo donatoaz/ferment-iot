@@ -4,6 +4,7 @@ class CreateData < ActiveRecord::Migration[5.1]
       t.integer :sensor_id
       t.string :value
 
+      t.timestamp :measured_at
       t.timestamps
     end
   end

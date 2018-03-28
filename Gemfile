@@ -38,12 +38,19 @@ gem "haml-rails", "~> 1.0"
 gem 'mqtt'
 gem 'paho-mqtt'
 gem 'redis'
+gem 'resque'
+#gem 'resque-web', require: 'resque_web'
+gem 'resque-scheduler'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'minitest-hooks'
+  gem 'pry-rails'
   gem 'selenium-webdriver'
 end
 

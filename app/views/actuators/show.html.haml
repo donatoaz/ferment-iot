@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @actuator.name
+  = @actuator.write_key
+
+.actuator#actuator{ "data-actuator-id": @actuator.id }
+
+= link_to 'Edit', edit_actuator_path(@actuator)
+\|
+= link_to 'Back', actuators_path

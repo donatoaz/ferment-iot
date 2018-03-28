@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @control_loop.name
+%p
+  %b Mode:
+  = @control_loop.mode
+%p
+  %b Reference:
+  = @control_loop.reference
+%p
+  %b Parameters:
+  = @control_loop.parameters
+%p
+  %b Sensor:
+  = link_to @control_loop.sensor.name, @control_loop.sensor
+%p
+  %b Actuator:
+  = link_to @control_loop.actuator.name, @control_loop.actuator
+  .actuator#actuator{ "data-actuator-id": @control_loop.actuator.id }
+
+.chart#chart
+.control-loop#control-loop{ "data-control-loop-id": @control_loop.id, "data-sensor-id": @control_loop.sensor.id }
+= link_to 'Edit', edit_control_loop_path(@control_loop)
+\|
+= link_to 'Back', control_loops_path

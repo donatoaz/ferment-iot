@@ -1,0 +1,28 @@
+= form_for @control_loop do |f|
+  - if @control_loop.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@control_loop.errors.count, "error")} prohibited this control_loop from being saved:"
+      %ul
+        - @control_loop.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :mode
+    = f.select :mode, ControlLoop.modes.keys
+  .field
+    = f.label :reference
+    = f.text_field :reference
+  .field
+    = f.label :parameters
+    = f.text_field :parameters
+  .field
+    = f.label :sensor
+    = f.collection_select :sensor_id, Sensor.all, :id, :name, prompt: true
+  .field
+    = f.label :actuator
+    = f.collection_select :actuator_id, Actuator.all, :id, :name, prompt: true
+  .actions
+    = f.submit 'Save'

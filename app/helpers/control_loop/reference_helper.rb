@@ -1,0 +1,2 @@
+module ControlLoop::ReferenceHelper
+end
