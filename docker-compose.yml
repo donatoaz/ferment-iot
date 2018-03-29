@@ -13,9 +13,13 @@ services:
     build: .
     environment:
       RAILS_ENV: "production"
+      REDIS_URL: "redis://redis:6379"
+      SECRET_KEY_BASE: "a0489e4ef023cb859fc7de7779ade0f493d5d8e20a249a4345e9605eadcf6578b0ceb78653a671b4fa65e509d967fa0944a983c6c59af9deb4c351dc782751c1"
+      RAILS_SERVE_STATIC_FILES: "1" # remember to change this once we have a real web server and not rails s -- https://stackoverflow.com/questions/21969549/rails-application-css-asset-not-found-in-production-mode
+    entrypoint: ["/bin/bash", "/web/lib/scripts/docker_run_pending_migrations.sh"]
     command: bundle exec rails s -b "0.0.0.0" -p 4000
     volumes:
-      - .:/web
+      - /home/donato/cervejator:/web
     ports:
       - "4000:4000"
     depends_on:
@@ -23,13 +27,19 @@ services:
       - redis
       - mqtt
   subscriber:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.subscriber
+    restart: always
     environment:
+      RAILS_ENV: "production"
+      REDIS_URL: "redis://redis:6379"
+      SECRET_KEY_BASE: "a0489e4ef023cb859fc7de7779ade0f493d5d8e20a249a4345e9605eadcf6578b0ceb78653a671b4fa65e509d967fa0944a983c6c59af9deb4c351dc782751c1"
       MQTT_BROKER_HOST: "mqtt"
       MQTT_BROKER_PORT: "1883"
     command: bundle exec rake mqtt:subscriber
     volumes:
-      - .:/web
+      - /home/donato/cervejator:/web
     depends_on:
       - redis
       - db
@@ -40,6 +50,18 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - "./mqtt/config:/mqtt/config:ro"
-      - "./mqtt/data:/mqtt/data"
-      - "./mqtt/log:/mqtt/log"
+      - /home/donato/mosquitto/config:/mqtt/config:ro
+      - /home/donato/mosquitto/data:/mqtt/data
+      - /home/donato/mosquitto/log:/mqtt/log
+  workers:
+    build:
+      context: .
+      dockerfile: Dockerfile.subscriber
+    environment:
+      QUEUE: "*"
+      RAILS_ENV: "production"
+      REDIS_URL: "redis://redis:6379"
+    command: bundle exec rake resque:work
+    depends_on:
+      - redis
+      - db

@@ -23,7 +23,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: sample_postgres_production
+  database: cervejator_postgres_production
   pool: 5
   username: cervejator
   password: fakeinitialpass
+  host: db

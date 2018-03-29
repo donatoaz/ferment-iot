@@ -27,3 +27,5 @@
 *.swp
 *.swo
 
+# should I ignore public assets?
+public/assets
