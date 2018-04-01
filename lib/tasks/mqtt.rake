@@ -10,22 +10,13 @@ namespace :mqtt do
       client.subscribe("sensor/#")
       client.subscribe("actuator/#")
 
-      last_value = 1000
-
       client.get do |topic, message|
         device, key = topic.split('/')
         puts "Received this: topic:#{topic}, device:#{device}, key:#{key}, message:#{message}"
         case device
         when "sensor"
           if sensor = Sensor.find_by(write_key: key)
-
-            # simple filter to prevent spurious reads, extract this to somewhere else.
             value = message.to_f
-            if value > 1.3 * last_value
-              value = last_value
-            end
-            last_value = value
-
             # broadcast reading to all listenners
             # assynchronously store data into databse
             reading_time = Time.now

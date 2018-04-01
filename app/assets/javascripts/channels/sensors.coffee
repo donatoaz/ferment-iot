@@ -71,7 +71,10 @@ $(document).on 'turbolinks:load', ->
     .then (response) ->
       chartData.push.apply(chartData, response.reverse())
       chartData.sort (a, b) ->
-        new Date(a.measured_at_formatted).getTime() - new Date(b.measured_at_formatted).getTime()
+        if a.measured_at_formatted > b.measured_at_formatted
+          1
+        else
+          -1
       chart.validateData()
       end = new Date()
       start = new Date()
@@ -87,7 +90,9 @@ $(document).on 'turbolinks:load', ->
       addDataToChart: (data) ->
         chartData.push data
         chartData.sort (a, b) ->
-          new Date(a.measured_at_formatted).getTime() - new Date(b.measured_at_formatted).getTime()
+          if a.measured_at_formatted > b.measured_at_formatted
+            1
+          else
+            -1
         chart.ignoreZoomed = true
         chart.validateData()
-        return

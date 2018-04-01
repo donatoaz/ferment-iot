@@ -1,4 +1,4 @@
-class ControlLoops::ReferencesController < ApplicationController
+class ReferencesController < ApplicationController
   before_action :set_reference
 
   def show

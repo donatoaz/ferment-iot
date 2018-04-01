@@ -3,28 +3,32 @@
 %p
   %b Name:
   = @control_loop.name
-%p
   %b Mode:
   = @control_loop.mode
-%p
   %b Reference:
   = @control_loop.reference
-%p
   %b Parameters:
   = @control_loop.parameters
-%p
   %b Next run:
   = @control_loop.next_run
-%p
   %b Sampling Rate:
   = @control_loop.sampling_rate
-%p
   %b Sensor:
   = link_to @control_loop.sensor.name, @control_loop.sensor
-%p
   %b Actuator:
   = link_to @control_loop.actuator.name, @control_loop.actuator
-  .actuator#actuator{ "data-actuator-id": @control_loop.actuator.id }
+  //.actuator#actuator{ "data-actuator-id": @control_loop.actuator.id }
+
+= form_with url: control_loop_reference_trackings_path(@control_loop), remote: true do |f|
+  = f.fields_for :reference_tracking do |rt|
+    .field
+      = rt.label :value
+      = rt.number_field :value, step: 0.1
+    .field
+      = rt.label :target_datetime
+      = rt.datetime_select :target_datetime
+    .actions
+      = rt.submit 'Save'
 
 .chart#chart
 .control-loop#control-loop{ "data-control-loop-id": @control_loop.id, "data-sensor-id": @control_loop.sensor.id }

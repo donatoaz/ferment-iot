@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :actuators
   resources :control_loops do
     resource :reference, only: %i(show create), module: 'control_loops'
+    resources :data, only: %i(index), module: 'control_loops'
+    resources :reference_trackings, only: %i(index create destroy), module: 'control_loops'
   end
 
   root to: "sensors#index"
