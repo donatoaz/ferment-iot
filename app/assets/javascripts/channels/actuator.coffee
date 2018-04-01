@@ -23,5 +23,5 @@ $(document).on 'turbolinks:load', ->
 
       createStatusElement: (data) ->
         """
-        <span>#{data['value']}</span>
+        <span>#{data}</span>
         """

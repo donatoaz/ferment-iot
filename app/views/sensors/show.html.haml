@@ -4,6 +4,7 @@
   = @sensor.name
   = @sensor.write_key
 .chart#chart
+= link_to 'load more data', sensor_data_path(@sensor, page: 2), remote: true
 .sensor-readings#sensor-readings{ "data-sensor-id": @sensor.id }
 = link_to 'Edit', edit_sensor_path(@sensor)
 |

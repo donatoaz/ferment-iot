@@ -1,0 +1,12 @@
+development: &development
+  ScheduleControlLoopsJob:
+    description: 'Polls control loops for execution'
+    queue: 'control_loops'
+    every:
+      - '10s'
+
+test:
+  <<: *development
+
+production:
+  <<: *development

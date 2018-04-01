@@ -27,7 +27,7 @@ $(document).on 'turbolinks:load', ->
       'balloonText': '[[category]]: [[value]]'
       }
     ]
-    'categoryField': 'created_at'
+    'categoryField': 'measured_at'
     'categoryAxis':
       'parseDates': true
       'equalSpacing': true

@@ -12,4 +12,5 @@
  *
  *= require_tree .
  *= require_self
+ *= require amcharts/dist/amcharts/plugins/export/export.css
  */

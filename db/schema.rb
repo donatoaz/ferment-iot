@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324215108) do
+ActiveRecord::Schema.define(version: 20180330182408) do
 
   create_table "actuators", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20180324215108) do
     t.integer "actuator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "next_run"
+    t.integer "sampling_rate"
     t.index ["actuator_id"], name: "index_control_loops_on_actuator_id"
     t.index ["sensor_id"], name: "index_control_loops_on_sensor_id"
   end

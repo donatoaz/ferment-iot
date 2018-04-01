@@ -54,4 +54,11 @@ Rails.application.configure do
 
   # devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 4000 }
+
+  if File.basename($0) == 'rake'
+    # http://stackoverflow.com/questions/2246141/puts-vs-logger-in-rails-rake-tasks
+    log_file     = Rails.root.join("log", "#{Rails.env}.log")
+    Rails.logger = ActiveSupport::Logger.new(log_file)
+    Rails.logger.extend(ActiveSupport::Logger.broadcast(ActiveSupport::Logger.new(STDOUT)))
+  end
 end

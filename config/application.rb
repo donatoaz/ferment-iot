@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'mqtt'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,7 +15,9 @@ module Cervejator
     config.active_job.queue_adapter = :resque
 
     #ActiveSupport::JSON::Encoding.time_precision = 0
-    ActiveSupport::JSON::Encoding.use_standard_json_time_format = false
+    #ActiveSupport::JSON::Encoding.use_standard_json_time_format = false
+
+    config.time_zone = 'America/Sao_Paulo'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

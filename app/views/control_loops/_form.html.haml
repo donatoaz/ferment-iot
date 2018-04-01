@@ -19,6 +19,12 @@
     = f.label :parameters
     = f.text_field :parameters
   .field
+    = f.label :next_run
+    = f.time_select :next_run
+  .field
+    = f.label :sampling_rate
+    = f.number_field :sampling_rate
+  .field
     = f.label :sensor
     = f.collection_select :sensor_id, Sensor.all, :id, :name, prompt: true
   .field

@@ -6,7 +6,7 @@ class Sensors::DataController < ApplicationController
 
   private
     def fetch_data
-      @data = Sensor.find(params[:sensor_id]).data.limit(20)
+      @data = Sensor.find(params[:sensor_id]).data.order(measured_at: :desc) #.page(params[:page]).per(300)
     end
 
     def sensor_params

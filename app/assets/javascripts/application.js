@@ -18,4 +18,5 @@
 //= require amcharts/dist/amcharts/amcharts.js
 //= require amcharts/dist/amcharts/serial.js
 //= require amcharts/dist/amcharts/themes/light.js
+// require amcharts/dist/amcharts/plugins/export/export.js
 //= require_tree .

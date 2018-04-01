@@ -13,6 +13,12 @@
   %b Parameters:
   = @control_loop.parameters
 %p
+  %b Next run:
+  = @control_loop.next_run
+%p
+  %b Sampling Rate:
+  = @control_loop.sampling_rate
+%p
   %b Sensor:
   = link_to @control_loop.sensor.name, @control_loop.sensor
 %p

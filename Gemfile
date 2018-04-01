@@ -33,8 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'active_scheduler'
 gem 'devise'
 gem "haml-rails", "~> 1.0"
+gem 'kaminari'
 gem 'mqtt'
 gem 'paho-mqtt'
 gem 'redis'

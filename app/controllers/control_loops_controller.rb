@@ -69,6 +69,9 @@ class ControlLoopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def control_loop_params
-      params.require(:control_loop).permit(:name, :mode, :reference, :parameters, :sensor_id, :actuator_id)
+      params.require(:control_loop).permit(:name, :mode, :reference,
+                                           :parameters, :next_run,
+                                           :sampling_rate, :sensor_id,
+                                           :actuator_id)
     end
 end
