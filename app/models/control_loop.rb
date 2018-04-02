@@ -13,10 +13,12 @@ class ControlLoop < ApplicationRecord
     elsif manual?
       return actuator.output
     elsif auto?
-      if sensor.last_reading.value.to_f < reference
-        return actuator.turn_off
-      else
+      if sensor.last_reading.value.to_f < instant_reference
+        #return actuator.turn_off
         return actuator.turn_on
+      else
+        #return actuator.turn_on
+        return actuator.turn_off
       end
     end
   end

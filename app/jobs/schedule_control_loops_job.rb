@@ -3,6 +3,7 @@ class ScheduleControlLoopsJob < ApplicationJob
 
   def perform
     ControlLoop.all.each do |cl|
+      next unless cl.mode == "auto"
       ActiveJob::Base.logger.debug "Checking #{cl.name} for run"
       if Time.now >= cl.next_run
         # enqueue assynchronous action, we don't want to hang around
