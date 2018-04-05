@@ -51,6 +51,10 @@ namespace :mqtt do
       Rails.logger.error "Errno::ETIMEDOUT error, #{e.message}. Going to Retry reconnection in 100 seconds"
       sleep 10
       retry
+    rescue Errno::ENETUNREACH => e
+      Rails.logger.error "Errno::ETIMEDOUT error, #{e.message}. Going to Retry reconnection in 100 seconds"
+      sleep 60
+      retry
     end
   end
 end
