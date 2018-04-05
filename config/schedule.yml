@@ -3,7 +3,7 @@ development: &development
     description: 'Polls control loops for execution'
     queue: 'control_loops'
     every:
-      - '10s'
+      - '20s'
 
 test:
   <<: *development
