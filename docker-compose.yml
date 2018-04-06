@@ -50,9 +50,9 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - /home/donato/mosquitto/config:/mqtt/config:ro
-      - /home/donato/mosquitto/data:/mqtt/data
-      - /home/donato/mosquitto/log:/mqtt/log
+      - /home/donato/cervejator/mqtt/config:/mqtt/config:ro
+      - /home/donato/cervejator/mqtt/data:/mqtt/data
+      - /home/donato/cervejator/mqtt/log:/mqtt/log
   workers:
     build:
       context: .
