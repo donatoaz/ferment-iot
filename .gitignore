@@ -29,3 +29,6 @@
 
 # should I ignore public assets?
 public/assets
+
+# mqtt folder
+mqtt/*
