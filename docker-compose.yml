@@ -65,3 +65,13 @@ services:
     depends_on:
       - redis
       - db
+  scheduler:
+    build: .
+    depends_on:
+      - redis
+      - workers
+    command: bundle exec rake resque:scheduler
+    environment:
+      QUEUE: "*"
+      RAILS_ENV: "production"
+      REDIS_URL: "redis://redis:6379"
