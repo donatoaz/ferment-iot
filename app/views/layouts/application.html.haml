@@ -6,11 +6,25 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %link{:href => "//fonts.googleapis.com/css?family=Raleway:400,300,600", :rel => "stylesheet", :type => "text/css"}/
   %body
-    - if user_signed_in?
-      %li
-        = link_to('Logout', destroy_user_session_path, method: :delete)
-    - else
-      %li
-        = link_to('Login', new_user_session_path)
-    = yield
+    .navbar-spacer
+    %nav.navbar
+      .container
+        %ul.navbar-list
+          %li.navbar-item
+            = link_to 'Home', root_path, class: 'navbar-link'
+          - if user_signed_in?
+            %li.navbar-item
+              = link_to 'Malhas de Controle', control_loops_path, class: 'navbar-link'
+            %li.navbar-item
+              = link_to 'Sensores', sensors_path, class: 'navbar-link'
+            %li.navbar-item
+              = link_to 'Atuadores', actuators_path, class: 'navbar-link'
+            %li.navbar-item
+              = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-link'
+          - else
+            %li.navbar-item
+              = link_to 'Login', new_user_session_path, class: 'navbar-link'
+    .body
+      = yield
