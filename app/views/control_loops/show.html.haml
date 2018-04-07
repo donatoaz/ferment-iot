@@ -19,6 +19,9 @@
   = link_to @control_loop.actuator.name, @control_loop.actuator
   //.actuator#actuator{ "data-actuator-id": @control_loop.actuator.id }
 
+- last = @control_loop.sensor.last_reading
+%h2= "Temperatura atual: #{last.value.to_s} (#{last.measured_at})"
+
 = form_with url: control_loop_reference_trackings_path(@control_loop), remote: true do |f|
   = f.fields_for :reference_tracking do |rt|
     .field

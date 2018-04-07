@@ -9,7 +9,10 @@ class ControlLoopJob < ApplicationJob
 
     return if action == :inactive
 
-    cli = Cervejator::MQTT.instance
+    #cli = Cervejator::MQTT.instance
+    cli = MQTT::Client.connect(host: ENV['MQTT_BROKER_HOST'], 
+                               username: 'mosquitto', 
+			       port: ENV['MQTT_BROKER_PORT'])
 
     # parameters are: topic, payload, retain flag
     # the retain flag means that the broker will store the last message for
@@ -20,6 +23,7 @@ class ControlLoopJob < ApplicationJob
     # FROM USING THIS, BECAUSE IT GENERATES A HUGE BACKLOG OF MESSAGES WHEN THE
     # SUBSCRIBER IS OFFLINE
     cli.publish("actuator/#{controller.actuator.write_key}", action, false, 1)
+    cli.disconnect()
 
     controller.update_attribute(:next_run, Time.now + controller.sampling_rate.seconds)
   end

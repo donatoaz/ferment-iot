@@ -19,7 +19,7 @@ namespace :mqtt do
             value = message.to_f
             # broadcast reading to all listenners
             # assynchronously store data into databse
-            reading_time = Time.now
+            reading_time = Time.zone.now
             reading = { measured_at: reading_time.to_formatted_s(:iso8601), 
                         measured_at_formatted: reading_time.strftime('%Y-%m-%d %H:%M:%S'),
                         value: value.to_s, sensor_id: sensor.id }

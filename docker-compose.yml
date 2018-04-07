@@ -61,6 +61,8 @@ services:
       QUEUE: "*"
       RAILS_ENV: "production"
       REDIS_URL: "redis://redis:6379"
+      MQTT_BROKER_HOST: "mqtt"
+      MQTT_BROKER_PORT: "1883"
     command: bundle exec rake resque:work
     depends_on:
       - redis
@@ -75,3 +77,5 @@ services:
       QUEUE: "*"
       RAILS_ENV: "production"
       REDIS_URL: "redis://redis:6379"
+      MQTT_BROKER_HOST: "mqtt"
+      MQTT_BROKER_PORT: "1883"
